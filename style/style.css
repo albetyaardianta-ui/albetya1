@@ -1,0 +1,407 @@
+/* --- 1. RESET & DASAR --- */
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: pink; /* Background Dasar Pink */
+  color: #2d3436;
+  overflow: hidden;
+}
+
+/* --- 2. CONTAINER & EFEK LAMPU GEMERLAP --- */
+.container {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  background-color: pink;
+  /* Lampu pijar statis di pojok */
+  background-image:
+    radial-gradient(
+      circle at 0% 30%,
+      rgba(214, 51, 132, 0.5) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 100% 70%,
+      rgba(255, 215, 0, 0.5) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 100% 20%,
+      rgba(77, 166, 255, 0.4) 0%,
+      transparent 30%
+    );
+}
+
+/* Efek Cahaya Gemerlap Berkedip Pelan */
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.2),
+    transparent 80%
+  );
+  animation: gemerlapLampu 3s infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes gemerlapLampu {
+  from {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* --- 3. POSISI KONTEN (NARIK KE ATAS) --- */
+.container > div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10vh; /* Semua konten ditarik ke atas */
+  z-index: 10;
+}
+
+.one {
+  font-family: "Playfair Display", serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+#name {
+  color: #d63384;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+/* --- 4. KOTAK PUTIH & TEKS BERJALAN --- */
+.four .text-box-surat {
+  width: 85%;
+  max-width: 600px; /* Diperlebar agar terasa 'surat' */
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 60px 40px; /* Padding luas agar kotak terasa 'gede' */
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Menjaga teks di tengah kotak */
+  min-height: 250px; /* Memberi ruang tinggi agar kotak tidak gepeng */
+  border: 1px solid rgba(214, 51, 132, 0.2);
+}
+
+.hbd-chatbox {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4rem; /* Ukuran teks diperbesar agar lebih jelas */
+  font-weight: 500;
+  color: #2d3436; /* Hitam Arang agar elegan */
+  margin: 0;
+  line-height: 1.6; /* Spasi antar baris biar enak dibaca */
+  text-align: left; /* Teks mengalir ke kiri (seperti surat) */
+  width: 100%;
+}
+
+/* Kursor berkedip (opsional, biar kayak ngetik) */
+.hbd-chatbox::after {
+  content: "|";
+  animation: cursorKedip 0.6s infinite alternate;
+}
+
+@keyframes cursorKedip {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fake-btn {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+  color: #d63384;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+/* --- 5. FOTO & MY GORGEOUS GIRL (FIXED) --- */
+.six {
+  top: 5vh !important; /* Foto naik lebih tinggi */
+}
+
+.six img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 15px;
+  border: 6px solid white; /* Frame Polaroid */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.wish-hbd {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  color: #2d3436;
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+#wishText {
+  font-size: 1.3rem;
+  color: #d63384;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+/* --- 6. OVERLAY PEMBUKA --- */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#playBtn {
+  padding: 15px 40px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  background-color: #2d3436;
+  color: white;
+  border: none;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+#playBtn:hover {
+  background-color: #d63384;
+  transform: scale(1.05);
+}
+
+/* Sembunyikan vektor hitam & elemen pengganggu */
+
+/* --- MEMUNCULKAN KEMBALI BALON & VEKTOR --- */
+.baloons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5; /* Di belakang foto utama tapi di depan background */
+  pointer-events: none;
+}
+
+.baloons img {
+  position: absolute;
+  width: 150px; /* Diperbesar dari sebelumnya */
+  height: auto;
+  border: 5px solid white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  bottom: -250px;
+  opacity: 0;
+  z-index: 5; /* Di belakang foto utama */
+}
+
+/* Sembunyikan SVG hitam yang bikin bulatan raksasa tadi */
+.eight svg {
+  display: none !important;
+}
+
+/* --- 7. MOBILE RESPONSIVE --- */
+@media (max-width: 500px) {
+  .container > div {
+    top: 6vh;
+  }
+  .one {
+    font-size: 2.5rem;
+  }
+  .six img {
+    max-width: 210px;
+  }
+  .wish-hbd {
+    font-size: 1.8rem;
+  }
+}
+/* --- EFEK POLAROID & GUNCANGAN --- */
+.polaroid-wrap {
+  display: inline-block;
+  perspective: 1000px;
+}
+
+.polaroid-frame {
+  background: white;
+  padding: 15px 15px 40px 15px; /* Padding bawah lebih besar untuk teks spidol */
+  border-radius: 5px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  transform: rotate(-3deg) scale(0.5); /* Awal kecil & miring */
+  opacity: 0;
+}
+
+/* Animasi Guncangan (Shake) saat foto muncul */
+@keyframes shakePhoto {
+  0% {
+    transform: rotate(-3deg) scale(1.1);
+  }
+  25% {
+    transform: rotate(2deg) scale(1);
+  }
+  50% {
+    transform: rotate(-2deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(1deg) scale(1);
+  }
+  100% {
+    transform: rotate(-3deg) scale(1);
+  }
+}
+
+.polaroid-text {
+  font-family: "Dancing Script", cursive; /* Gunakan font tulisan tangan */
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 15px;
+  letter-spacing: 1px;
+}
+
+/* --- HUJAN CINTA (LOVE RAIN) --- */
+#love-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 1.5rem;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* --- FLASH KAMERA --- */
+.camera-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Efek Polaroid & Teks Spidol */
+.polaroid-frame {
+  background: white;
+  padding: 15px 15px 40px 15px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+}
+.polaroid-text {
+  font-family: "Dancing Script", cursive; /* Pastikan font ini di-import */
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Flash Kamera */
+.camera-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hujan Hati */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 1.5rem;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Animasi Goyang */
+@keyframes shakePhoto {
+  0% {
+    transform: rotate(-3deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(-3deg) scale(1);
+  }
+}
+/* --- FIX KHUSUS LAYAR HP (TAMBAHKAN DI PALING BAWAH CSS) --- */
+@media screen and (max-width: 600px) {
+  .container > div {
+    top: 8vh !important; /* Biar gak mentok atas */
+  }
+  .polaroid-frame {
+    width: 80vw !important; /* Foto mengecil otomatis di HP */
+    max-width: 250px;
+    padding-bottom: 30px !important;
+  }
+  .six img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .wish-hbd {
+    font-size: 1.6rem !important;
+  }
+  /* Agar teks surat muat di layar HP */
+  .four .text-box-surat {
+    width: 90% !important;
+    padding: 20px 10px !important;
+  }
+  .hbd-chatbox {
+    font-size: 0.9rem !important;
+  }
+}
